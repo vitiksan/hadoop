@@ -9,22 +9,21 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-import java.io.IOException;
-
 public class WordCount {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = new Configuration();
         if (args.length != 2) {
             System.out.println("Error! False count of arguments!");
             return;
         }
 
-        Configuration configuration = new Configuration();
         Job job = Job.getInstance(configuration, "word counter");
         job.setJarByClass(WordCount.class);
 
         job.setMapperClass(WordMapper.class);
         job.setReducerClass(WordCountReducer.class);
+        job.setCombinerClass(WordCountReducer.class);
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
@@ -33,8 +32,6 @@ public class WordCount {
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
-        if (job.isSuccessful()) System.out.println("Job successfully completed");
-        else if (job.isComplete()) System.out.println("Job completed with not expected result");
-        else System.out.println("Job failed");
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 }

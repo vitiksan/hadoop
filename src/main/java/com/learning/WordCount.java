@@ -63,10 +63,10 @@ public class WordCount {
             return;
         }
 
-        /*AwsSnsMessage snsMessage = new AwsSnsMessage();
+        AwsSnsMessage snsMessage = new AwsSnsMessage();
         snsMessage.createTopic();
         snsMessage.subscribe(email);
-        */System.out.println("Email for subscribe on this job has sent.");
+        System.out.println("Email for subscribe on this job has sent.");
 
         String temp;
         do {
@@ -76,7 +76,7 @@ public class WordCount {
             if (temp.equalsIgnoreCase("n")) {
                 System.out.print("Re-enter email: ");
                 email = in.next();
-//                snsMessage.subscribe(email);
+                snsMessage.subscribe(email);
                 System.out.println("Message has sent again");
             }
         } while (!temp.equalsIgnoreCase("y"));
@@ -86,10 +86,10 @@ public class WordCount {
 
 
         boolean isSuccessfully = job.waitForCompletion(false);
-        /*if (isSuccessfully)
+        if (isSuccessfully)
             snsMessage.sendMessage("Job finished successfully");
         else
             snsMessage.sendMessage("Job finished with error");
-        */System.exit(isSuccessfully ? 0 : 1);
+        System.exit(isSuccessfully ? 0 : 1);
     }
 }

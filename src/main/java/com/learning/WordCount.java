@@ -61,8 +61,13 @@ public class WordCount {
 
         Job job = setUp(inputPath, outputPath, onS3);
 
-        boolean isSuccessfully = job.waitForCompletion(true);
         AwsSnsMessage snsMessage = new AwsSnsMessage();
+        boolean isSuccessfully = false;
+        try {
+            isSuccessfully = job.waitForCompletion(true);
+        } catch (Exception e) {
+            snsMessage.sendMessage("Job finished with error");
+        }
 
         if (isSuccessfully)
             snsMessage.sendMessage("Job finished successfully");

@@ -1,6 +1,7 @@
 package com.learning;
 
 import com.amazonaws.services.sns.AmazonSNSClient;
+import com.learning.wordCount.WordCountRunner;
 import org.apache.hadoop.mapreduce.Job;
 
 import java.io.IOException;

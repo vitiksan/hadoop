@@ -1,4 +1,4 @@
-package com.learning;
+package com.learning.wordCount;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class WordMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
     private final static IntWritable ONE = new IntWritable(1);
 
     @Override

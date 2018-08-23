@@ -1,4 +1,4 @@
-package com.learning;
+package com.learning.wordCount;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;

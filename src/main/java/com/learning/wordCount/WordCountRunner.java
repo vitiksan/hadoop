@@ -1,10 +1,12 @@
-package com.learning;
+package com.learning.wordCount;
 
 import com.amazonaws.services.s3.model.AmazonS3Exception;
+import com.learning.AwsUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.RawComparator;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -45,7 +47,7 @@ public class WordCountRunner {
     public static int run(String input, String output, boolean onS3) throws IOException {
         String tempDir = "tempDirForJob";
 
-        Job wordCounter = setUp("word counter", input, tempDir, onS3, WordMapper.class,
+        Job wordCounter = setUp("word counter", input, tempDir, onS3, WordCountMapper.class,
                 WordCountReducer.class, Text.class, IntWritable.class);
 
         FileSystem fs = FileSystem.get(wordCounter.getConfiguration());

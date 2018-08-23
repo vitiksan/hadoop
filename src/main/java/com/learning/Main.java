@@ -1,5 +1,7 @@
 package com.learning;
 
+import com.learning.wordCount.WordCountRunner;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         boolean onS3 = args[0].equals("s3");
